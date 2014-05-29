@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DR TV Cast</string>
+    <string name="title_episode_detail">Episode Detail</string>
+    <string name="play">PLAY</string>
+    <string name="title_activity_video_player">videoPlayer</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>
