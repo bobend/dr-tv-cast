@@ -22,8 +22,10 @@ import android.widget.VideoView;
  *
  * @see SystemUiHider
  */
-public class videoPlayer extends Activity {
+public class VideoPlayer extends Activity {
 
+    public static final String ARG_ASSET_URI = "asset-uri";
+    public static final String ARG_TITLE = "title";
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -34,13 +36,13 @@ public class videoPlayer extends Activity {
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
      * user interaction before hiding the system UI.
      */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+    private static final int AUTO_HIDE_DELAY_MILLIS = 1500;
 
     /**
      * If set, will toggle the system UI visibility upon interaction. Otherwise,
      * will show the system UI visibility upon interaction.
      */
-    private static final boolean TOGGLE_ON_CLICK = true;
+    private static final boolean TOGGLE_ON_CLICK = false;
 
     /**
      * The flags to pass to {@link SystemUiHider#getInstance}.
@@ -58,8 +60,10 @@ public class videoPlayer extends Activity {
 
         setContentView(R.layout.activity_video_player);
         Intent intent = getIntent();
-        String message = intent.getStringExtra("assetUri");
-        String hlsUri = MuOnline.GetHLS(message);
+        String assetUri = intent.getStringExtra(ARG_ASSET_URI);
+        String title = intent.getStringExtra(ARG_TITLE);
+        setTitle(title);
+        String hlsUri = MuOnline.GetHLS(assetUri);
 
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
@@ -122,11 +126,13 @@ public class videoPlayer extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+       // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
         VideoView videoView = (VideoView) contentView;/*.findViewById(R.id.videoView);*/
         videoView.setVideoURI(Uri.parse(hlsUri));
         MediaController mc = new MediaController(controlsView.getContext());
+
+        mc.setOnTouchListener(mDelayHideTouchListener);
         videoView.setMediaController(mc);
         videoView.requestFocus();
         videoView.start();

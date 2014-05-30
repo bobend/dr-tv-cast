@@ -25,7 +25,7 @@
                 android:value="dr.dk.drtvcast.app.EpisodeListActivity" />
         </activity>
         <activity
-            android:name="dr.dk.drtvcast.app.videoPlayer"
+            android:name=".VideoPlayer"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_video_player"
             android:theme="@style/FullscreenTheme" >

@@ -75,12 +75,13 @@ public class EpisodeListFragment extends ListFragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         MuOnline.LoadFrontPage();
+        MuOnline.LoadSelectedList();
         // TODO: replace with a real list adapter.
         setListAdapter(new ArrayAdapter<MuOnline.Item>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                MuOnline.FRONT_PAGE.SelectedList.Items));
+                MuOnline.SELECTED_LIST.Items));
     }
 
     @Override
@@ -120,7 +121,7 @@ public class EpisodeListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(MuOnline.FRONT_PAGE.SelectedList.Items.get(position).Slug);
+        mCallbacks.onItemSelected(MuOnline.SELECTED_LIST.Items.get(position).Slug);
     }
 
     @Override

@@ -17,8 +17,24 @@ import com.google.gson.*;
 public class MuOnline {
 
     public static FrontPage FRONT_PAGE;
+    public static ItemList SELECTED_LIST;
     static {
 
+    }
+    public static void LoadSelectedList(){
+        if (SELECTED_LIST != null)
+            return;
+        try {
+            URL api = new URL("http://www.dr.dk/mu-online/api/1.0/list/view/selectedlist?limit=25");
+            BufferedReader in = new BufferedReader( new InputStreamReader(api.openStream()));
+            Gson gson = new GsonBuilder().create();
+            SELECTED_LIST= gson.fromJson(in, ItemList.class);
+        } catch (MalformedURLException e) {
+
+        }
+        catch (IOException e) {
+
+        }
     }
     public static void LoadFrontPage(){
         if (FRONT_PAGE != null)

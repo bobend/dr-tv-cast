@@ -2,7 +2,6 @@ package dr.dk.drtvcast.app;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,16 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import dr.dk.drtvcast.app.dummy.DummyContent;
 import dr.dk.drtvcast.app.mu.MuOnline;
 
 /**
@@ -84,8 +80,9 @@ public class EpisodeDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v)
                 {
-                    Intent player = new Intent(rootView.getContext(),videoPlayer.class);
-                    player.putExtra("assetUri", mItem.PrimaryAsset.Uri);
+                    Intent player = new Intent(rootView.getContext(),VideoPlayer.class);
+                    player.putExtra(VideoPlayer.ARG_ASSET_URI, mItem.PrimaryAsset.Uri);
+                    player.putExtra(VideoPlayer.ARG_TITLE, mItem.Title);
                     startActivity(player);
                 }
             });
